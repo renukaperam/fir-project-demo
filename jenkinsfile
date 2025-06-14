@@ -1,0 +1,26 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Create Python Script') {
+            steps {
+                echo 'Creating hello.py...'
+                writeFile file: 'hello.py', text: 'print("Hello, World from Jenkins Pipeline!")'
+            }
+        }
+
+        stage('Verify Python Version') {
+            steps {
+                echo 'Checking Python version...'
+                sh 'python3 --version'
+            }
+        }
+
+        stage('Run Python Script') {
+            steps {
+                echo 'Running hello.py...'
+                sh 'python3 hello.py'
+            }
+        }
+    }
+}
